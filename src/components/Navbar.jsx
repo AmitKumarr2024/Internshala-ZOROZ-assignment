@@ -5,18 +5,17 @@ import { useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 
 const Navbar = () => {
-  const [text, setText] = useState("");
-  const cartItems = useSelector((state) => state.cart.items);
-  const navigate = useNavigate();
+  const [text, setText] = useState(""); // State to hold the search input text
+  const cartItems = useSelector((state) => state.cart.items); // Get cart items from Redux store
+  const navigate = useNavigate(); // Hook to navigate to different routes
 
   const handleSearchText = (e) => {
-    setText(e.target.value);
+    setText(e.target.value); // Update search text state when input changes
   };
 
   const handleSearchSubmit = (e) => {
     e.preventDefault();
-    // Navigate to the ProductSearch page with the query as state
-    navigate("/search", { state: { query: text } });
+    navigate("/search", { state: { query: text } }); // Navigate to search page with query
   };
 
   return (
