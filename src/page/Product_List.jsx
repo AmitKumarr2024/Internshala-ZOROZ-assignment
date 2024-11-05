@@ -1,4 +1,3 @@
-// src/components/ProductList.js
 import React, { useState } from "react";
 import useProductCategories from "../hook/useAllProductCategories";
 import useCategoryProducts from "../hook/useSingleProductCategories";
@@ -11,37 +10,42 @@ const ProductList = () => {
     categories,
     loading: loadingCategories,
     error: errorCategories,
-  } = useProductCategories();
-  const [selectedCategory, setSelectedCategory] = useState("");
-  const [sortBy, setSortBy] = useState("title");
-  const [order, setOrder] = useState("asc"); // Default order
+  } = useProductCategories(); // Fetch categories
+
+  const [selectedCategory, setSelectedCategory] = useState(""); // State to store the selected category
+  const [sortBy, setSortBy] = useState("title"); // State to store sorting criteria
+  const [order, setOrder] = useState("asc"); // State to store sorting order (ascending)
 
   const {
     products,
     loading: loadingProducts,
     error: errorProducts,
-  } = useCategoryProducts(selectedCategory, sortBy, order);
+  } = useCategoryProducts(selectedCategory, sortBy, order); // Fetch products based on selected category and sorting
 
-  const dispatch = useDispatch();
+  const dispatch = useDispatch(); // Initialize dispatch for Redux actions
 
   const handleCategoryChange = (event) => {
-    setSelectedCategory(event.target.value.replace(/\s+/g, "-"));
+    // Function to handle category change
+    setSelectedCategory(event.target.value.replace(/\s+/g, "-")); // Update the selected category
   };
 
   const handleSortByChange = (event) => {
-    setSortBy(event.target.value);
+    // Function to handle sorting criteria change
+    setSortBy(event.target.value); // Update the sorting criteria
   };
 
   const toggleOrder = () => {
-    setOrder((prevOrder) => (prevOrder === "asc" ? "desc" : "asc"));
+    // Function to toggle sorting order
+    setOrder((prevOrder) => (prevOrder === "asc" ? "desc" : "asc")); // Change order from ascending to descending or vice versa
   };
 
   const handleAddToCart = (product) => {
-    dispatch(addToCart(product));
+    // Function to handle adding product to the cart
+    dispatch(addToCart(product)); // Dispatch action to add the product to the cart
   };
 
-  if (loadingCategories) return <p>Loading categories...</p>;
-  if (errorCategories) return <p>Error: {errorCategories}</p>;
+  if (loadingCategories) return <p>Loading categories...</p>; // Show loading message for categories
+  if (errorCategories) return <p>Error: {errorCategories}</p>; // Show error message for categories
 
   return (
     <div className="flex relative mt-16">
@@ -74,10 +78,11 @@ const ProductList = () => {
 
         <h2 className="text-xl font-extrabold mt-4">Order</h2>
         <button
-          onClick={toggleOrder}
+          onClick={toggleOrder} // Call toggleOrder function on button click
           className="w-full p-2 border rounded my-2 bg-blue-500 text-white"
         >
-          {order === "asc" ? "High to Low" : "Low to High"}
+          {order === "asc" ? "High to Low" : "Low to High"} // Display current
+          order
         </button>
       </div>
 
@@ -85,9 +90,10 @@ const ProductList = () => {
         <h2 className="text-2xl text-center font-extrabold">Product List</h2>
         <hr className="my-6" />
         {loadingProducts && (
-          <h1 className="text-2xl text-center">Loading products...</h1>
+          <h1 className="text-2xl text-center">Loading products...</h1> // Show loading message for products
         )}
         {errorProducts && <p>Error: {errorProducts}</p>}
+
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
           {products.map((product) => (
             <div key={product.id} className="border p-4 rounded shadow-lg">
@@ -104,7 +110,7 @@ const ProductList = () => {
                 </p>
               </Link>
               <button
-                onClick={() => handleAddToCart(product)}
+                onClick={() => handleAddToCart(product)} // Call handleAddToCart function on button click
                 className="w-full bg-blue-500 text-white rounded-xl p-2 mt-4"
               >
                 Add to Cart
@@ -117,4 +123,4 @@ const ProductList = () => {
   );
 };
 
-export default ProductList;
+export default ProductList; // Export the ProductList component

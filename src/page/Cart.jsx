@@ -1,4 +1,3 @@
-// src/components/Cart.js
 import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { removeFromCart, updateCartItem } from "../store/cartSlice";
@@ -14,34 +13,33 @@ const Cart = () => {
   const [amount, setAmount] = useState(0);
 
   const handleRemove = (id) => {
-    dispatch(removeFromCart(id));
+    dispatch(removeFromCart(id)); // Remove item from the cart
   };
 
   const handleUpdateQuantity = (id, quantity) => {
-    if (quantity < 1) return; // Ensure quantity doesn't go below 1
-    dispatch(updateCartItem({ id, quantity }));
+    if (quantity < 1) return; // Prevent quantity from going below 1
+    dispatch(updateCartItem({ id, quantity })); // Update item quantity in the cart
   };
 
-  // Calculate total price
+  // Calculate total price of all items in the cart
   const totalPrice = cartItems.reduce(
     (total, item) => total + item.price * item.quantity,
     0
   );
 
   const handleProceedToPayment = () => {
-    setAmount(Math.floor(totalPrice));
-    setShowPaymentModal(true);
+    setAmount(Math.floor(totalPrice)); // Set payment amount to total price
+    setShowPaymentModal(true); // Show payment modal
   };
 
   const handlePay = () => {
-    // Payment processing logic here
-    alert(`Payment of $${amount} processed successfully!`);
-    setShowPaymentModal(false);
+    alert(`Payment of $${amount} processed successfully!`); // Show success message
+    setShowPaymentModal(false); // Close payment modal
   };
 
   const handleCancel = () => {
-    alert(`Payment of $${amount} processed Cancel, Try Again later`);
-    setShowPaymentModal(false);
+    alert(`Payment of $${amount} processed Cancel, Try Again later`); // Show cancellation message
+    setShowPaymentModal(false); // Close payment modal
   };
 
   return (

@@ -1,6 +1,5 @@
 import { useState, useEffect } from "react";
 
-// Custom hook to fetch products
 function useProducts() {
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -15,7 +14,7 @@ function useProducts() {
           throw new Error("Failed to fetch products");
         }
         const data = await response.json();
-        setProducts(data.products); // Assuming products array is in 'data.products'
+        setProducts(data.products);
       } catch (err) {
         setError(err.message);
       } finally {

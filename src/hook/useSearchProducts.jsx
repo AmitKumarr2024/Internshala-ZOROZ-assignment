@@ -1,4 +1,3 @@
-// src/hooks/useSearchProducts.js
 import { useState, useEffect } from "react";
 
 const useSearchProducts = (query) => {

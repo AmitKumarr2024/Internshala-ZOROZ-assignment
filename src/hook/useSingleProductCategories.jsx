@@ -1,4 +1,3 @@
-// src/hooks/useCategoryProducts.js
 import { useState, useEffect } from "react";
 
 const useCategoryProducts = (category, sortBy = "title", order = "asc") => {

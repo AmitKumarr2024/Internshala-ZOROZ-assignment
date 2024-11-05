@@ -11,14 +11,14 @@ import ProductSearch from "../page/ProductSearch";
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <App />, // Use App as the main layout
+    element: <App />,
     children: [
       {
-        index: true, // Home page as the index route
+        index: true,
         element: <Home />,
       },
       {
-        path: "product-details/:id", // Assume you pass product ID as a param
+        path: "product-details/:id",
         element: <Product_details />,
       },
       {
@@ -32,9 +32,10 @@ const router = createBrowserRouter([
       {
         path: "cart",
         element: <Cart />,
-      },{
+      },
+      {
         path: "search",
-        element: <ProductSearch/>,
+        element: <ProductSearch />,
       },
     ],
   },

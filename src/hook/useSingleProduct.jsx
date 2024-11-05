@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 
 const useSingleProduct = (id) => {
-  const [product, setProduct] = useState(null); // Singular 'product' since it's a single item
+  const [product, setProduct] = useState(null); 
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
@@ -14,7 +14,7 @@ const useSingleProduct = (id) => {
           throw new Error("Failed to fetch product");
         }
         const data = await response.json();
-        setProduct(data); // Assuming the API returns a single product object
+        setProduct(data); 
       } catch (err) {
         setError(err.message);
       } finally {
